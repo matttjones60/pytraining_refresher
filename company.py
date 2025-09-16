@@ -1,9 +1,13 @@
-from employee import Employee
+from employee import Employee, SalaryEmployee, HourlyEmployee, CommissionEmployee
 
 class Company:
     def __init__(self, name):
-        self.name = name
         self.employees = []
+    
+    def display_employees(self):
+        print(f"Current employees:")
+        for emp in self.employees:
+            print(f"- {emp.name}")
     
     def add_employee(self, employee):
         self.employees.append(employee)
@@ -15,15 +19,14 @@ class Company:
 def main():
     my_company = Company("Tech Solutions")
 
-    emp1 = Employee("Alice", "Developer", 80000)
-    emp2 = Employee("Bob", "Designer", 70000)
-
+    emp1 = SalaryEmployee("Alice", "Developer", 80000)
     my_company.employees.append(emp1)
+    emp2 = HourlyEmployee("Bob", "Designer", 25, 50)
     my_company.employees.append(emp2)
+    emp3 = CommissionEmployee("Charlie", "Salesperson", 50000, 0.10, 20000)
+    my_company.employees.append(emp3)
 
-    print(f"Company: {my_company.name}")
-    for emp in my_company.employees:
-        emp.display_info()
-        print(f"Weekly Salary: ${emp.calculate_salary():.2f}")
+    my_company.pay_employees()
+    my_company.display_employees()
 
 main()
