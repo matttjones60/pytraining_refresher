@@ -11,7 +11,7 @@ CONCEPTS = {
     'learning_misc': []
 }
 
-SOURCE_DIR = './your_python_files'  # Update this path
+SOURCE_DIR = './'  # Update this path
 
 def categorize_by_concept(filepath):
     try:
@@ -25,7 +25,11 @@ def categorize_by_concept(filepath):
     return 'learning_misc'
 
 def organize_files(dry_run=False):
+    current_script = os.path.basename(__file__)
+
     for filename in os.listdir(SOURCE_DIR):
+        if filename == current_script:
+            continue
         if filename.endswith('.py'):
             full_path = os.path.join(SOURCE_DIR, filename)
             category = categorize_by_concept(full_path)
